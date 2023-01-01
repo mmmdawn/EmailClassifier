@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Email Classification</title>
+</head>
+<body>
+<h1>Email Classification</h1>
+<p>Enter an email to classify:</p>
+<textarea id="email"></textarea>
+<br>
+<button id="classify-button">Classify</button>
+<br>
+<p>Classification: <span id="classification"></span></p>
+<script>
+    // add an event listener to the classify button
+    document.getElementById('classify-button').addEventListener('click', function () {
+        // get the email from the text box
+        const email = document.getElementById('email').value;
+
+        // send a request to the API endpoint with the email
+        fetch('/classify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: email})
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // update the classification span with the response from the API
+                document.getElementById('classification').innerHTML = data.class;
+            });
+    });
+</script>
+</body>
+</html>
