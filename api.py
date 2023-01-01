@@ -35,8 +35,6 @@ def classify_email(email: Email):
             ham_prob, spam_prob = cond_probs[word]
             prob_ham *= ham_prob
             prob_spam *= spam_prob
-    logger.info(f'Spam: {prob_spam * 100}')
-    logger.info(f'Ham: {prob_ham * 100}')
     if prob_ham > prob_spam:
         return {"class": "non-spam"}
     else:
