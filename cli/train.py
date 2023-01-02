@@ -14,7 +14,7 @@ logger = get_logger('Training')
 @click.option('-p', '--test-percentage', type=float, help='Percentage of data will be used for testing.')
 def train(dataset: str, test_percentage: float):
     if not test_percentage:
-        test_percentage = 0.01
+        test_percentage = 0.1
 
     db = SQLiteDatabse('knowledge.db')
     emails = []
@@ -81,7 +81,7 @@ def train(dataset: str, test_percentage: float):
         db.close()
 
     '''classify the test emails using bayes' theorem'''
-    logger.info('Training done! Stat testing test emails')
+    logger.info('Training done! Start testing test emails')
     predictions = []
     for i in range(len(test_emails)):
         email = test_emails[i]
